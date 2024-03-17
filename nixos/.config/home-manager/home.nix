@@ -86,7 +86,28 @@
 
     sessionVariables = {
         BEMENU_OPTS = "--tb #282c34 --tf #51afef --nb #282c34 --nf #bbc2cf --sb #51afef --sf #444b59 --fb #282c34 --ff #bbc2cf --hb #51afef --hf #444b59 --ab #282c34 --af #bbc2cf";
+        PATH = "$PATH:/home/ki11errabbit/.cabal/bin:/home/ki11errabbit/.local/bin:$PATH:/home/ki11errabbit/.local/share/flatpak/exports/bin:/var/lib/flatpak/exports/bin:/home/ki11errabbit/.cargo/bin";
     };
+
+    initExtra = ''
+    function ya() {
+        local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
+        yazi "$@" --cwd-file="$tmp"
+        if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+            cd -- "$cwd"
+        fi
+        rm -f -- "$tmp"
+    }
+
+
+    function neovim() {
+        local tmp="/tmp/nvim_cwd"
+        nvim "$@" 
+        cwd="$(cat -- "$tmp")"
+        cd -- "$cwd"
+        rm -f -- "$tmp"
+    }
+    '';
 
   };
 

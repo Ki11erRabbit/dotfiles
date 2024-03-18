@@ -1,0 +1,31 @@
+#!/bin/dash
+
+case $BLOCK_BUTTON in
+	#*) find ~/Pictures/Wallpapers/dwm -type f \( -name '*.jpg' -o -name '*.png' \) -print0 |
+        #shuf -n1 -z | xargs -0 feh --bg-fill;;
+    2)  cat ~/.fehbg | awk 'FNR==2 {print}' | sed 's/feh --no-fehbg --bg-fill//g' | xargs xdg-open;;
+		#pkill -RTMIN+10 dwmblocks;;
+	3) notify-send "🖼️ Wallpaper Module" "Changes wallpaper
+- Left click to change." ;;
+	6) $TERMINAL -e $EDITOR "$0" ;;
+	*) case $(od -vAn -N1 -tu < /dev/urandom) in
+        *1*) find ~/Pictures/Wallpapers/dwm -type f \( -name '*.jpg' -o -name '*.png' \) -print0 |
+            shuf -z | shuf -n5 -z | shuf -n1 -z | xargs -0 feh --bg-fill;;
+        *2*) find ~/Pictures/Wallpapers/dwm -type f \( -name '*.jpg' -o -name '*.png' \) -print0 |
+            shuf -z| shuf -n1 -z | xargs -0 feh --bg-fill;;
+        *3*) find ~/Pictures/Wallpapers/dwm -type f \( -name '*.jpg' -o -name '*.png' \) -print0 |
+            shuf -z | shuf -z |shuf -n20 -z| shuf -n1 -z | xargs -0 feh --bg-fill;;
+        *4*) find ~/Pictures/Wallpapers/dwm -type f \( -name '*.jpg' -o -name '*.png' \) -print0 |
+            shuf -n2 -z | shuf -n1 -z | xargs -0 feh --bg-fill;;
+        *6*) find ~/Pictures/Wallpapers/dwm -type f \( -name '*.jpg' -o -name '*.png' \) -print0 |
+            shuf -n30 -z| shuf -n1 -z | xargs -0 feh --bg-fill;;
+        *7*) find ~/Pictures/Wallpapers/dwm -type f \( -name '*.jpg' -o -name '*.png' \) -print0 |
+            shuf -z | shuf -z | shuf -n15 -z| shuf -n1 -z | xargs -0 feh --bg-fill;;
+        *) find ~/Pictures/Wallpapers/dwm -type f \( -name '*.jpg' -o -name '*.png' \) -print0 |
+            shuf -n1 -z | xargs -0 feh --bg-fill;; 	   
+            esac
+    kill -56 $(pidof dwmblocks)
+
+       ;;
+esac && echo "🖼️"
+

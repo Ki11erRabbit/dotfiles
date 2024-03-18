@@ -1,0 +1,57 @@
+XF86HomePage; {f,b,s,c}
+	{firefox, brave, tabbed -c surf -e, ungoogled-chromium}
+
+super + v 
+	copyq menu
+
+super + w; {f,b,s,c}
+	{firefox, brave, tabbed -c surf -e, ungoogled-chromium}
+
+super + p 
+	cabl
+
+super + r
+	thunar
+
+super + ctrl + e
+	easyeffects
+
+# -| DWM mouse control |- #
+super + {button6, button7}
+	xdotool key --clearmodifiers super+{comma,period}
+
+super + shift + {button6,button7}
+	xdotool key --clearmodifiers super+shift+{comma,period}
+
+super + {button4,button5}
+	xdotool key --clearmodifiers super+{u,l}
+
+super + shift {button4,button5}
+	xdotool key --clearmodifiers super+shift+{u,l}
+
+
+# -| Screenshots |- #
+
+super + s
+	spectacle --region --background
+
+super + {shift +, alt +}s
+	{spectacle --region --background --copy-image,flameshot gui}
+
+# -| Monitor Control -| #
+XF86MonBrightnessUp
+	light -A 5
+	#monbrightcontrol 1 15
+
+XF86MonBrightnessDown
+	light -U 5
+	#monbrightcontrol 1 -15
+
+
+ctrl + {XF86MonBrightnessUp,XF86MonBrightnessDown}
+	#monbrightcontrol 2 {15, -15}
+	light {-A, -U} 5
+
+alt + {XF86MonBrightnessUp,XF86MonBrightnessDown}
+	#monbrightcontrol 3 {15, -15}
+	light {-A, -U} 5

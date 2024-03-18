@@ -1,0 +1,23 @@
+#!/bin/dash
+
+
+update() {
+plugged=$(lsusb | grep Unicomp | wc -l);
+
+if [[ $plugged = 1 ]]; then
+    unicomp
+    echo "Uni" > /tmp/keyboard-state
+else
+    unicomp
+    echo "Moon" > /tmp/keyboard-state
+fi
+}
+
+case $BLOCK_BUTTON in
+     1) update ; pkill -RTMIN+19 dwmblocks;;
+     3) notify-send "Keyboard" "shows which keyboard layout is being used" ; unicomp;;
+     6) $TERMINAL -e nvim "$0"; update;;
+     *) cat /tmp/keyboard-state || echo "Moon" ;;
+esac
+
+cat /tmp/keyboard-state || echo "Moon"

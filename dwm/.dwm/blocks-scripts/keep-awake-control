@@ -1,0 +1,22 @@
+#!/bin/dash
+icon="n"
+
+if [ $(pidof caffeinate) ]; then
+    icon="☕"
+else
+    icon="🧋"
+fi
+
+case $BLOCK_BUTTON in
+    1) if [ $(pidof caffeinate) ]; then
+           pkill caffeinate
+           icon="🧋"
+       else
+           icon="☕"
+           kill -54 $(pidof dwmblocks)
+       fi;;
+
+	3) notify-send "☕ Caffine Module" "\- Prevents xidlehook from running.";;
+	6) $TERMINAL -e $EDITOR "$0" ;;
+esac
+echo "$icon"

@@ -1,0 +1,12 @@
+#!/bin/dash
+
+# Prints the current linux kernel version
+
+case $BLOCK_BUTTON in
+	1) setsid -f $TERMINAL --working-directory /usr/src/linux ;;
+	3) notify-send "🐧 Kernel Module" "\- Shows kernel version";;
+	6) $TERMINAL -e $EDITOR "$0" ;;
+esac
+
+
+echo "🐧 $(uname -r)"

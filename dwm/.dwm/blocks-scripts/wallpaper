@@ -1,0 +1,38 @@
+#!/bin/dash
+
+determine() {
+    case $(date '+%a') in
+    Fri) femboy_friday ;;
+    *) normal ;;
+    esac
+}
+
+normal() {
+	nitrogen --random --head=0 ~/Pictures/Wallpapers/dwm --set-zoom-fill
+    nitrogen --random --head=1 ~/Pictures/Wallpapers/dwm --set-zoom-fill
+    nitrogen --random --head=2 ~/Pictures/Wallpapers/Tallpapers/ --set-zoom-fill
+    
+}
+
+femboy_friday() {
+	nitrogen --random --head=0 ~/Pictures/Wallpapers/dwm/Femboy --set-zoom-fill
+    nitrogen --random --head=1 ~/Pictures/Wallpapers/dwm/Femboy --set-zoom-fill
+    nitrogen --random --head=2 ~/Pictures/Wallpapers/Tallpapers/Femboys --set-zoom-fill
+}
+
+
+case $BLOCK_BUTTON in
+	#*) find ~/Pictures/Wallpapers/dwm -type f \( -name '*.jpg' -o -name '*.png' \) -print0 |
+        #shuf -n1 -z | xargs -0 feh --bg-fill;;
+    2)  cat ~/.fehbg | awk 'FNR==2 {print}' | sed 's/feh --no-fehbg --bg-fill//g' | xargs xdg-open;;
+		#pkill -RTMIN+10 dwmblocks;;
+	3) notify-send "🖼️ Wallpaper Module" "Changes wallpaper
+- Left click to change." ;;
+	6) $TERMINAL -e $EDITOR "$0" ;;
+	*) determine
+    kill -56 $(pidof dwmblocks)
+
+       ;;
+esac && echo "🖼️"
+
+

@@ -1,0 +1,31 @@
+#!/bin/dash
+icon="n"
+switch_state() {
+    case $CAFFEINATE in
+        0) export CAFFEINATE=1
+           caffeinate &
+           icon="☕";;
+        1) export CAFFEINATE=0
+           pkill caffeinate
+           icon="🧋";;
+    esac
+}
+
+
+case $BLOCK_BUTTON in
+	1) if [ $(pidof caffeinate | wc -l) = 0 ]; then
+           icon="☕"
+           # add in extra block script that activates when this one does in order to flip it
+           kill -64 $(pidof dwmblocks)
+           notify-send "on"
+       else
+           pkill caffeinate
+           icon="🧋"
+           notify-send "off"
+       fi
+                  ;;
+	2) switch_state;;
+	3) notify-send "☕ Caffine Module" "\- Prevents xidlehook from running.";;
+	6) $TERMINAL -e $EDITOR "$0" ;;
+esac
+echo "$icon"

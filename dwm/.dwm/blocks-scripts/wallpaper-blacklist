@@ -1,0 +1,65 @@
+#!/bin/dash
+
+case $BLOCK_BUTTON in
+    #1) pkill -RTMIN+10 dwmblocks ;;
+    2)  cat ~/.fehbg | awk 'FNR==2 {print}' | sed 's/feh --no-fehbg --bg-fill//g' | xargs xdg-open;;
+		#pkill -RTMIN+10 dwmblocks;;
+	3) notify-send "🖼️ Wallpaper Module" "Changes wallpaper
+- Left click to change." ;;
+	6) $TERMINAL -e $EDITOR "$0" ;;
+	*) find ~/Pictures/Wallpapers/dwm -type f \( -name '*.jpg' -o -name '*.png' \) -print0 |
+        shuf -n1 -z | xargs -0 feh --bg-fill;
+
+       path=$(cat ~/.fehbg | awk 'FNR==2 {print}' | sed 's/feh --no-fehbg --bg-fill//g')
+       echo "🖼️"
+       # blacklist to prevent certain wallpapers from becoming lockscreen
+       case $path in
+           *74922321_p0.jpg*)exit 1;;
+           *78657213_p1.jpg*)exit 1;;
+           *78657213_p3.jpg*)exit 1;;
+           *EsPY9uMVcAEt1fC*)exit 1;;
+           *54237099_p0*)exit 1;;
+           *EDqrlY9U4AEW_os.jpeg*)exit 1;;
+           *f51040b.jpg*)exit 1;;
+           *RDT_20211015_00355792008528116845930.jpg*)exit 1;;
+           *RDT_20211015_00355792008528116845930.jpg*)exit 1;;
+           *69555472_p27.png*)exit 1;;
+           *69555472_p29.png*)exit 1;;
+           *f51040b.jpg*)exit 1;;
+           *FEUFVSOUYAM2yGL-upscale.jpeg*)exit 1;;
+           *11xnx_output.png*)exit 1;;
+           *Altera_output.png*)exit 1;;
+           *Illya_Beach_Swimwear_2_output.png*)exit 1;;
+           *C359ViTUkAAyyTo_output.jpg*)exit 1;;
+           *0017\ \(1\).png*)exit 1;;
+           *0017\ \(2\).png*)exit 1;;
+           *0032.png*)exit 1;;
+           *0024\ \(1\).png*)exit 1;;
+           *0043.png*)exit 1;;
+           *Game\ 2/EV001*)exit 1;;
+           *Game\ 3/MGD_000035*)exit 1;;
+           *Game\ 3/MGD_000061*)exit 1;;
+           *Game\ 4/MGD_000031*)exit 1;;
+           *Game\ 5/MGD_000040*)exit 1;;
+           *Game\ 5/MGD_000041*)exit 1;;
+           *Game\ 5/MGD_000042*)exit 1;;
+           *Game\ 6/EV004*)exit 1;;
+           *Game\ 7/EV10*)exit 1;;
+           *Game\ 7/EV13*)exit 1;;
+           *Game\ 8/CU03*)exit 1;;
+           *Game\ 10/MGD_000054*)exit 1;;
+           *Game\ 10/MGD_000069*)exit 1;;
+           *Game\ 10/MGD_000073*)exit 1;;
+           *Game\ 10/MGD_000074*)exit 1;;
+           *Game\ 10/MGD_000075*)exit 1;;
+           *Game\ 4/MGD_000023*)exit 1;;
+           *Game\ 4/MGD_000060*)exit 1;;
+           *Game\ 9/CU02*)exit 1;;
+           *Game\ 9/CU03*)exit 1;;
+       esac
+
+	   cat ~/.fehbg | awk 'FNR==2 {print}' | sed 's/feh --no-fehbg --bg-fill//g' | xargs betterlockscreen -q -u &
+
+	   ;;
+esac && echo "🖼️"
+

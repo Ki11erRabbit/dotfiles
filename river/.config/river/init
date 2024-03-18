@@ -34,7 +34,7 @@ riverctl map normal None XF86MonBrightnessDown spawn 'light -U 30'
 
 riverctl map normal None XF86AudioMicMute spawn 'amixer set Capture toggle'
 
-riverctl map normal None XF86Tools spawn 'neovide /etc/nixos/configuration.nix'
+riverctl map normal None XF86Tools spawn '/home/ki11errabbit/.local/bin/nix-config.sh'
 
 riverctl map normal None XF86Search spawn 'bemenu-run'
 riverctl map normal None XF86WLAN spawn 'alacritty -e nmtui'

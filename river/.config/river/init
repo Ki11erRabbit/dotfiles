@@ -24,8 +24,11 @@ riverctl map normal Super D spawn bemenu-run
 
 riverctl map normal Super S spawn 'grimshot save area'
 riverctl map normal Super+Shift S spawn 'grimshot copy area'
+riverctl map normal None Print spawn 'grimshot save screen'
+riverctl map normal Shift Print spawn 'grimshot copy screen'
 
 riverctl map normal Super R spawn dolphin
+riverctl map normal None XF86Explorer spawn 'dolphin'
 
 riverctl map normal Super+Shift W spawn '/home/ki11errabbit/.local/bin/screen-toggle.sh'
 
@@ -38,6 +41,7 @@ riverctl map normal None XF86Tools spawn '/home/ki11errabbit/.local/bin/nix-conf
 
 riverctl map normal None XF86Search spawn 'bemenu-run'
 riverctl map normal None XF86WLAN spawn 'alacritty -e nmtui'
+riverctl map normal None XF86Display spawn 'wdisplays'
 
 # Super+Q to close the focused view
 riverctl map normal Super Q close

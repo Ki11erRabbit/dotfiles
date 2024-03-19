@@ -1,0 +1,80 @@
+(defcfg
+    input (device-file "/dev/input/by-id/usb-Lite-On_Tech_IBM_USB_Travel_Keyboard_with_Ultra_Nav-event-kbd")
+    output (uinput-sink "IBM Thinkpad Travel Keyboard")
+    cmp-seq ralt
+    cmp-seq-delay 5
+    fallthrough true
+    allow-cmd false
+)
+
+(defalias 
+    srch KeySearch
+    vido KeySwitchVideoMode
+    cfg  KeyConfig
+    lnch KeyScale
+    cctl (layer-toggle colemakctl)
+    qctl (layer-toggle qwertyctl)
+    swchq (layer-switch qwerty)
+    swchc (layer-switch colemak)
+    fwd   KeyForward
+    bck   KeyBack
+
+)
+
+
+(defsrc
+  esc            vold volu mute                ssrq slck pp    ins  home pgup
+  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12   del  end  pgdn
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc  
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \     
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret        
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft                 
+  wkup lctl lalt           spc                 ralt rctl wkup up   wkup       
+                                                         left down rght  
+)
+
+(deflayer colemak
+  esc            vold volu mute                ssrq slck pp    ins  home pgup
+  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12   del  end  pgdn
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    caps  
+  tab  q    w    f    p    b    j    l    u    u    ;    [    ]    \     
+  bspc a    r    s    t    g    m    n    e    i    o    '    ret        
+  lsft x    c    d    v    z    k    h    ,    .    /    rsft                 
+  _    @cctl lalt           spc                 ralt @cctl @bck up   @fwd       
+                                                         left down rght  
+)
+
+(deflayer colemakctl
+  C-esc            C-vold C-volu C-mute                C-ssrq C-slck C-pp    C-ins  C-home C-pgup
+  C-f1   C-f2   C-f3   C-f4   C-f5   C-f6   C-f7   C-f8   C-f9   C-f10  C-f11  C-f12   C-del  C-end  C-pgdn
+  C-grv  C-1    C-2    C-3    C-4    C-5    C-6    C-7    C-8    C-9    C-0    C--    C-=    C-caps  
+  C-tab  C-q    C-w    C-f    C-p    C-b    C-j    C-l    C-u    C-y    C-;    C-[    C-]    C-\     
+  C-bspc C-a    C-r    C-s    C-t    C-g    C-m    C-n    C-e    C-i    C-o    C-'    C-ret        
+  C-lsft C-x    C-c    C-d    C-v    C-z    C-k    C-h    C-,    C-.    C-/    C-rsft                 
+  _    _     C-lalt           @swchq                 C-ralt _     C-@bck C-up   C-@fwd       
+                                                         C-left C-down C-rght  
+)
+
+
+(deflayer qwerty
+  esc            vold volu mute                ssrq slck pp    ins  home pgup
+  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12   del  end  pgdn
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc  
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \     
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret        
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft                 
+  _    @qctl lalt           spc                 ralt @qctl @bck up   @fwd       
+                                                         left down rght  
+)
+
+(deflayer qwertyctl
+  C-esc            C-vold C-volu C-mute                C-ssrq C-slck C-pp    C-ins  C-home C-pgup
+  C-f1   C-f2   C-f3   C-f4   C-f5   C-f6   C-f7   C-f8   C-f9   C-f10  C-f11  C-f12   C-del  C-end  C-pgdn
+  C-grv  C-1    C-2    C-3    C-4    C-5    C-6    C-7    C-8    C-9    C-0    C--    C-=    C-bspc  
+  C-tab  C-q    C-w    C-e    C-r    C-t    C-y    C-u    C-i    C-o    C-p    C-[    C-]    C-\     
+  C-caps C-a    C-s    C-d    C-f    C-g    C-h    C-j    C-k    C-l    C-;    C-'    C-ret        
+  C-lsft C-z    C-x    C-c    C-v    C-b    C-n    C-m    C-,    C-.    C-/    C-rsft                 
+  _    _     C-lalt           @swchc                 C-ralt _     C-@bck C-up   C-@fwd       
+                                                         C-left C-down C-rght  
+)
+

@@ -10,6 +10,7 @@ fi
 for dir in */ ; do
     case $dir in
         .git) continue ;;
+        root) continue ;;
     esac
     case $device in 
         laptop) case $dir in
@@ -22,3 +23,7 @@ for dir in */ ; do
     echo "Setting up $dir"
     stow "$dir"
 done
+
+echo "Asking for sudo to setup /root"
+sudo stow -t /root root
+

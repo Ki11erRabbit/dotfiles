@@ -35,7 +35,7 @@
     tab   q     w     f     p     b    j    l     u     y     ;     [     ]     \
     bspc  a     r     s     t     g    m    n     e     i     o     '     ret
     lsft  x     c     d     v     z    k    h     ,     .     /     rsft
-    @cctl _     lmet  lalt        spc             ralt  ssrq  @cctl pgup  up    pgdn
+    @cctl _     lalt  lmet        spc             ralt  ssrq  @cctl pgup  up    pgdn
                                                                     left  down  rght
 )
 (deflayer colemakctl
@@ -44,7 +44,7 @@
     C-tab   C-q     C-w     C-f     C-p     C-b    C-j    C-l     C-u     C-y     C-;     C-[     C-]      C-\
     C-bspc  C-a     C-r     C-s     C-t     C-g    C-m    C-n     C-e     C-i     C-o     C-'     C-ret
     C-lsft  C-x     C-c     C-d     C-v     C-z    C-k    C-h     C-,     C-.     C-/     C-rsft
-    _       _       C-lmet  C-lalt          @swchq                C-ralt  C-ssrq  C-rctl  C-pgup  C-up    C-pgdn
+    _       _       C-lalt  C-lmet          @swchq                C-ralt  C-ssrq  C-rctl  C-pgup  C-up    C-pgdn
                                                                                           C-left  C-down  C-rght
 )
 
@@ -54,7 +54,7 @@
     tab   q     w     e     r     t    y    u     i     o     p     [     ]      \
     caps  a     s     d     f     g    h    j     k     l     ;     '     ret
     lsft  z     x     c     v     b    n    m     ,     .     /     rsft
-    @qctl _     lmet  lalt        spc             ralt  ssrq  @qctl pgup  up    pgdn
+    @qctl _     lalt  lmet        spc             ralt  ssrq  @qctl pgup  up    pgdn
                                                                     left  down  rght
 )
 
@@ -64,7 +64,7 @@
     C-tab   C-q     C-w     C-e     C-r     C-t    C-y    C-u     C-i     C-o     C-p     C-[     C-]      C-\
     C-bspc  C-a     C-s     C-d     C-f     C-g    C-h    C-j     C-k     C-l     C-;     C-'     C-ret
     C-lsft  C-z     C-x     C-c     C-v     C-b    C-n    C-m     C-,     C-.     C-/     C-rsft
-    _       _       C-lmet  C-lalt          @swchc                C-ralt  C-ssrq  C-rctl  C-pgup  C-up    C-pgdn
+    _       _       C-lalt  C-lmet          @swchc                C-ralt  C-ssrq  C-rctl  C-pgup  C-up    C-pgdn
                                                                                           C-left  C-down  C-rght
 )
 

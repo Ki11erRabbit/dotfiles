@@ -34,4 +34,19 @@
     };
       
   };
+
+  security.sudo = {
+    enable = true;
+    extraRules = [{
+        commands = [{
+            command = "${pkgs.dmidecode}/bin/dmidecode";
+            options = [ "NOPASSWD" ];
+            }
+            {
+            command = "/run/current-system/sw/bin/dmidecode";
+            options = [ "NOPASSWD" ];
+            }];
+        groups = [ "wheel" ];
+    }];
+  };
 }

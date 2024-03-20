@@ -212,8 +212,8 @@ riverctl focus-follows-cursor always
 dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river
 /home/ki11errabbit/.local/bin/setup-keyboard.sh &
 
-#/usr/lib/kdeconnectd &
+dbus-daemon --session --address="unix:path=$XDG_RUNTIME_DIR/bus" &
 
-kdeconnect-indicator &
 nm-applet &
 blueman-applet &
+kdeconnect-indicator &

@@ -21,6 +21,8 @@
     stow
     fnott
     wdisplays
+    xournalpp
+    gimp
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -53,6 +55,7 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
   };
+
 
   programs.git = {
     enable = true;

@@ -1,0 +1,83 @@
+{
+    "layer": "top",
+    "position": "top",
+    "margin-left": 5,
+    "margin-right": 5,
+    "margin-top": 7,
+    "modules-right": ["tray","custom/kernel","custom/pipewire","clock","custom/sysmenu"],
+    "spacing": 10,
+    "modules-left": ["wlr/workspaces","hyprland/window"],
+    "modules-center": [],
+    
+    "hyprland/window": {
+            "format": "{}"
+
+    },
+    "tray": {
+            "icon-size": 21,
+            "spacing": 5
+        },
+    "clock": {
+        "interval": 1,
+        "format": "{:%I:%M%p %b %d, %Y}",
+      },
+    "custom/sysmenu": {
+        "format": "⏻",
+        "on-click": "display-menu $(hyprctl activewindow | awk '$1 ~ /^monitor/' | awk '{ print $2 }') &",
+        "tooltip": false
+      },
+    "custom/pipewire": {
+        "tooltip": false,
+        "max-length": 6,
+        "signal": 8,
+        "restart-interval": 0,
+        "exec": "$HOME/.config/waybar/scripts/pipewire.sh",
+        "on-click": "pavucontrol &"
+    },
+    "custom/weather": {
+        "format": "{}",
+        "tooltip": false,
+        "max-length": 6,
+        "signal": 9,
+        "interval":3600,
+        "exec": "$HOME/.config/waybar/scripts/weather.sh 0",
+        "on-click": "$HOME/.config/waybar/scripts/weather.sh 1"
+    },
+    "custom/kernel": {
+        "format": "{icon} {}",
+        "format-icons": "🐧",
+        "tooltip": false,
+        "interval":"once",
+        "exec": "uname -r",
+    },
+    "wlr/workspaces": {
+      "format": "{icon}",
+      "on-click": "activate",
+      "format-icons": {
+        "1": "1",
+        "2": "2",
+        "3": "3",
+        "4": "4",
+        "5": "5",
+        "6": "1",
+        "7": "2",
+        "8": "3",
+        "9": "4",
+        "10": "5",
+        "11": "6",
+        "12": "7",
+        "13": "8",
+        "14": "9",
+        "15": "10",
+        "16": "6",
+        "17": "7",
+        "18": "8",
+        "19": "9",
+        "20": "10",
+        "urgent": "",
+        "default": ""
+      },
+      "sort-by-number": true
+    }
+  }
+

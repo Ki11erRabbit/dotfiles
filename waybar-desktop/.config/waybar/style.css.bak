@@ -1,0 +1,74 @@
+* {
+    all: unset;
+
+    font-family: "LiterationMono Nerd Font", "monospace";
+}
+
+/* Waybar */
+window#waybar {
+  background-color: #282c34;
+  color: #bbc2cf;
+  padding-left:10px;
+  padding-right:10px;
+  border-radius: 10px;
+  border: 2px solid #51afef;
+}
+
+#hyprland-window {
+}
+
+#custom-sysmenu {
+  padding: 1px 7px;
+  padding-left: 4px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 2px;
+  margin-right: 10px;
+  border-radius: 20px;
+} 
+
+#custom-sysmenu:hover {
+  background-color: #51afef;
+  color: #444b59;
+}
+
+/* Workspaces */
+#workspaces {
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+#workspaces button {
+  background-color: #282c34;
+  padding: 1px 6px;
+  color: #bbc2cf;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 2px;
+  margin-right: 2px;
+  border-radius: 20px;
+  transition-duration: 0.2s;
+}
+
+#workspaces button:hover {
+  background-color: #51afef;
+  color: #444b59;
+  transition-duration: 0.2s;
+}
+
+#workspaces button.active {
+  padding: 1px 6px;
+  background-color: #51afef;
+  color: #444b59;
+  transition-duration: 0.2s;
+}
+
+#workspaces button.focused {
+  background-color: #bbc2cf;
+  color: #282c34;
+}
+
+#workspaces button.urgent {
+  background-color: #ff6c6b;
+  color: #444b59;
+}

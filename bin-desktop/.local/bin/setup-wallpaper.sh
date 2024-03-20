@@ -3,4 +3,4 @@
 
 
 
-/home/ki11errabbit/.local/bin/wallpaper-wayland start &
+/home/ki11errabbit/.local/bin/wallpaper-wayland.sh start &

@@ -23,6 +23,8 @@
     wdisplays
     xournalpp
     gimp
+    powershell
+    godot_4
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello

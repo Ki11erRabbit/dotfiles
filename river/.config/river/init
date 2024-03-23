@@ -206,13 +206,12 @@ riverctl focus-follows-cursor always
 
 /home/ki11errabbit/.local/bin/setup-wallpaper.sh &
 
-
 /home/ki11errabbit/.local/bin/setup-swayidle.sh &
 
-dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river
 /home/ki11errabbit/.local/bin/setup-keyboard.sh &
 
 dbus-daemon --session --address="unix:path=$XDG_RUNTIME_DIR/bus" &
+dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river &
 
 nm-applet &
 blueman-applet &

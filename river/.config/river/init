@@ -201,6 +201,7 @@ waybar &
 fnott &
 
 riverctl focus-follows-cursor always
+riverctl xcursor-theme Posy_Cursor 32
 
 /home/ki11errabbit/.local/bin/configure-monitors.sh &
 

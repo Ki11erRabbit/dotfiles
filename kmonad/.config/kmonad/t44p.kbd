@@ -16,16 +16,19 @@
     qctl (layer-toggle qwertyctl)
     swchq (layer-switch qwerty)
     swchc (layer-switch colemak)
+    fn (layer-toggle function)
 
 )
 
+
+
 (defsrc
-    esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12   home end  ins  del
+    esc  mute vold volu f20  brdn brup KeySwitchVideoMode wlan  KeyConfig  KeySearch KeyScale file   home  end   ins   del
     grv  1    2    3    4    5    6    7    8    9    0    -    =     bspc
     tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
     caps a    s    d    f    g    h    j    k    l    ;    '    ret
     lsft z    x    c    v    b    n    m    ,    .    /    rsft
-    lctl spc  lmet lalt      spc            ralt ssrq rctl pgup up   pgdn
+    lctl wkup lmet lalt      spc            ralt ssrq rctl pgup up   pgdn
                                                            left down rght
 )
 
@@ -35,7 +38,7 @@
     tab   q     w     f     p     b    j    l     u     y     ;     [     ]     \
     bspc  a     r     s     t     g    m    n     e     i     o     '     ret
     lsft  x     c     d     v     z    k    h     ,     .     /     rsft
-    @cctl _     lalt  lmet        spc             ralt  ssrq  @cctl pgup  up    pgdn
+    @cctl @fn   lalt  lmet        spc             ralt  ssrq  @cctl pgup  up    pgdn
                                                                     left  down  rght
 )
 (deflayer colemakctl
@@ -54,7 +57,7 @@
     tab   q     w     e     r     t    y    u     i     o     p     [     ]      \
     caps  a     s     d     f     g    h    j     k     l     ;     '     ret
     lsft  z     x     c     v     b    n    m     ,     .     /     rsft
-    @qctl _     lalt  lmet        spc             ralt  ssrq  @qctl pgup  up    pgdn
+    @qctl @fn   lalt  lmet        spc             ralt  ssrq  @qctl pgup  up    pgdn
                                                                     left  down  rght
 )
 
@@ -66,5 +69,15 @@
     C-lsft  C-z     C-x     C-c     C-v     C-b    C-n    C-m     C-,     C-.     C-/     C-rsft
     _       _       C-lalt  C-lmet          @swchc                C-ralt  C-ssrq  C-rctl  C-pgup  C-up    C-pgdn
                                                                                           C-left  C-down  C-rght
+)
+
+(deflayer function
+    _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12   _    _    _    _  
+    _    _    _    _    _    _    _    _    _    _    _    _    _     _   
+    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+    _    _    _    _    _    _    _    _    _    _    _    _    _  
+    _    _    _    _    _    _    _    _    _    _    _    _   
+    _    _    _    _         _              _    _    _    _    _    _   
+                                                           _    _    _   
 )
 

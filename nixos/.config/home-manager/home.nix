@@ -26,6 +26,12 @@
     powershell
     godot_4
     trash-cli
+    zoxide
+    delta
+    du-dust
+    fd
+    hexyl
+    procs
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -76,6 +82,7 @@
     autocd = true;
     
     shellAliases = {
+        cd = "z";
         home = "cd";
         root = "cd /";
         bat = "bat --style plain";
@@ -84,7 +91,7 @@
         tree = "exa --tree --icons";
         cp = "cp -iv";
         mv = "mv -iv";
-        rm = "rm -v";
+        rm = "trash -v";
         grep = "grep --color=auto";
     };
     localVariables = {
@@ -130,6 +137,7 @@
     fi
     unset __conda_setup
     # <<< conda initialize <<<
+    eval "$(zoxide init zsh)"
     '';
 
   };

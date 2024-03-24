@@ -25,6 +25,7 @@
     gimp
     powershell
     godot_4
+    trash-cli
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -96,6 +97,7 @@
     };
 
     initExtra = ''
+    setopt globdots
     function ya() {
         local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
         yazi "$@" --cwd-file="$tmp"

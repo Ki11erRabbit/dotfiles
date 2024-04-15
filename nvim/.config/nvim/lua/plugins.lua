@@ -90,6 +90,7 @@ plugins = {
     'Ki11erRabbit/fm-nvim',
     'elkasztano/nushell-syntax-vim',
     'junegunn/vim-plug',
+    'chrisbra/unicode.vim',
 
 
 

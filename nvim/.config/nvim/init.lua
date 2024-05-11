@@ -14,9 +14,14 @@ vim.opt.rtp:prepend(lazypath)
 require('plugins')
 require('options')
 require('colemak-dh')
-require('lsp')
+if vim.g.vscode then
+
+else
+    require('lsp')
+    vim.cmd('colorscheme doom-one')
+end
+
 require('config')
 
 
 
-vim.cmd('colorscheme doom-one')

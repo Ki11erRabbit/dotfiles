@@ -108,7 +108,6 @@ face global StatusLineInfo ${base6},${bg_statusline}
 face global StatusLineValue ${base6},${bg_statusline}
 face global StatusCursor default,${fg}
 
-face global Prompt rgb:1a2128,rgb:c678dd
 
 
 # Shades of blue/cyan for normal mode
@@ -117,6 +116,7 @@ set-face global SecondaryCursor black,${green_alt}+F
 set-face global PrimaryCursorEol black,${green}
 set-face global SecondaryCursorEol black,${green_alt}
 set-face global StatusLineMode ${bg},${green}
+set-face global Prompt ${bg},${green}
 
 # Shades of green/yellow for insert mode.
 hook global ModeChange (push|pop):.*:insert %{
@@ -125,6 +125,7 @@ hook global ModeChange (push|pop):.*:insert %{
     set-face window PrimaryCursorEol black,${blue}
     set-face window SecondaryCursorEol black,${cyan}
     set-face window StatusLineMode ${bg},${blue}
+	set-face global Prompt ${bg},${blue}
 }
 
 # Undo colour changes when we leave insert mode.
@@ -134,6 +135,7 @@ hook global ModeChange (push|pop):insert:.* %{
     unset-face window PrimaryCursorEol
     unset-face window SecondaryCursorEol
     unset-face window StatusLineMode
+	unset-face window Prompt
 }
 
 hook global ModeChange (push|pop):.*:prompt %{
@@ -142,6 +144,7 @@ hook global ModeChange (push|pop):.*:prompt %{
     set-face window PrimaryCursorEol black,${blue}
     set-face window SecondaryCursorEol black,${cyan}
     set-face window StatusLineMode ${bg},${violet}
+	set-face global Prompt ${bg},${violet}
 }
 
 # Undo colour changes when we leave insert mode.
@@ -151,6 +154,7 @@ hook global ModeChange (push|pop):prompt:.* %{
     unset-face window PrimaryCursorEol
     unset-face window SecondaryCursorEol
     unset-face window StatusLineMode
+	unset-face window Prompt
 }
 "
 }

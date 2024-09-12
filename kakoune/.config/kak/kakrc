@@ -79,14 +79,21 @@ bundle kak-rainbow https://github.com/Bodhizafa/kak-rainbow %{
 	}
 }
 
+bundle coqoune https://github.com/guest0x0/coqoune %{}
 
+bundle-install-hook coqoune %{
+    make
+}
 
 
 
 bundle kakoune-lsp https://github.com/kakoune-lsp/kakoune-lsp %{
 }
+bundle-install-hook kakoune-lsp %{
+    cargo install --locked --force --path .
+}
 eval %sh{kak-lsp --kakoune -s $kak_session}  # Not needed if you load it with plug.kak.
-lsp-enable
+#lsp-enable
 
 hook global WinSetOption filetype=<language> %{
   hook window -group semantic-tokens BufReload .* lsp-semantic-tokens

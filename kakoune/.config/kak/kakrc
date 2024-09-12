@@ -74,7 +74,7 @@ bundle-install-hook parinfer-rust %{
 }
 
 bundle kak-rainbow https://github.com/Bodhizafa/kak-rainbow %{
-	hook global WinSetOption filetype=(koka|rust|python|c|c++|scheme|lisp|clojure|javascript|json) %{
+	hook global WinSetOption filetype=(koka|rust|python|c|c++|scheme|lisp|clojure|javascript|json|coq) %{
         rainbow-enable-window
 	}
 }

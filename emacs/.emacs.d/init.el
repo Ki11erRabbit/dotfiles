@@ -93,6 +93,18 @@
 (add-hook 'prog-mode-hook 'copilot-mode)
 (define-key copilot-completion-map (kbd "C-<tab>") 'copilot-accept-completion)
 
+(use-package dap-mode
+        :ensure t
+        :config
+        (setq dap-auto-configure-features '(sessions locals controls tooltip))
+        ;(require 'dap-java)
+        (require 'dap-python)
+        (setq dap-python-debugger 'debugpy)
+        (require 'dap-gdb)
+        (setq dap-gdb-debug-program '("rust-gdb" "-i" "dap"))
+        (require 'dap-dlv-go))
+
+
 (use-package drag-stuff
   :config
   (drag-stuff-global-mode 1)
@@ -129,7 +141,7 @@
   :init
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
-  (setq evil-want-C-i-jump nil)
+  (setq evil-want-C-i-jump t)
   (setq evil-want-C-w-scroll t)
   (setq evil-want-C-w-in-emacs-state t)
   (setq evil-want-C-w-delete t)
@@ -307,9 +319,24 @@
 
 (delete-selection-mode 1)
 
-(evil-mode 1)
 
-(evil-define-key '(motion normal visual) 'global
+(evil-mode 1)
+(evil-select-search-module 'evil-search-module 'evil-search)
+
+(evil-define-key '(motion normal) 'global
+		 "m" 'evil-backward-char
+		 "n" 'evil-next-line
+		 "gn" 'evil-next-visual-line
+		 "e" 'evil-previous-line
+		 "ge" 'evil-previous-visual-line
+		 "i" 'evil-forward-char
+		 "j" 'evil-next-match
+		 "J" 'evil-previous-match
+		 "M" 'evil-window-top
+		 "I" 'evil-window-bottom
+		 "K" 'evil-window-middle)
+
+(evil-define-key '(visual) 'visual
 		 "m" 'evil-backward-char
 		 "n" 'evil-next-line
 		 "gn" 'evil-next-visual-line
@@ -343,7 +370,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(ligature sudo-edit deadgrep indent-guide centaur-tabs sublimity zig-mode which-key vterm vertico-posframe spacious-padding solaire-mode rust-mode rainbow-delimiters racket-mode quelpa-use-package python-mode proof-general projectile paredit-menu nix-mode lua-mode lsp-ui lsp-treemacs lsp-haskell idris-mode golden-ratio go-mode doom-themes doom-modeline dired-rsync copilot company-box async all-the-icons-dired))
+   '(dap-mode ligature sudo-edit deadgrep indent-guide centaur-tabs sublimity zig-mode which-key vterm vertico-posframe spacious-padding solaire-mode rust-mode rainbow-delimiters racket-mode quelpa-use-package python-mode proof-general projectile paredit-menu nix-mode lua-mode lsp-ui lsp-treemacs lsp-haskell idris-mode golden-ratio go-mode doom-themes doom-modeline dired-rsync copilot company-box async all-the-icons-dired))
  '(warning-suppress-types
    '(((copilot copilot-no-mode-indent))
      ((copilot copilot-no-mode-indent))

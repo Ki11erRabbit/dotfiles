@@ -85,7 +85,7 @@ face global list ${fg},default
 # kakoune UI
 
 face global Default ${fg},${bg}
-face global PrimarySelection default,${bg_highlight}
+face global PrimarySelection default,${base4}
 face global SecondarySelection default,${bg_alt}
 face global PrimaryCursor ${bg},${fg}+b
 face global SecondaryCursor ${bg},${fg_highlight}+b

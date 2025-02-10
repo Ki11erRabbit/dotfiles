@@ -58,6 +58,19 @@
 (use-package all-the-icons-nerd-fonts
   :after all-the-icons)
 
+(use-package auctex
+  :ensure t
+  :defer t
+  :config
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  (setq-default TeX-master nil)
+  (setq TeX-PDF-mode t)
+  (bind-keys :map evil-normal-state-map
+	     :prefix "SPC"
+             :prefix-map preview-map
+	     ("l p" . preview-buffer)))
+
 (use-package dired-rsync
   :bind (:map dired-mode-map
 	      ("C-x d" . dired-rsync)))
@@ -83,6 +96,16 @@
 
 (use-package company-box
   :hook (company-mode . company-box-mode))
+
+(use-package company-auctex
+  :ensure t
+  :after company
+  :after auctex
+  :hook (LaTeX-mode . company-auctex-init))
+
+(use-package cdlatex
+  :ensure t
+  :hook (LaTeX-mode . turn-on-cdlatex))
 
 (quelpa '(copilot
 	  :fetcher github
@@ -268,11 +291,13 @@
   :ensure t
   :hook (after-init . spacious-padding-mode))
 
-(use-package sudo-edit)
-(bind-keys :map evil-normal-state-map
-	   :prefix "SPC"
-	   :prefix-map sudo-edit-map
-	   ("s e" . sudo-edit))
+(use-package sudo-edit
+  :config
+  (bind-keys :map evil-normal-state-map
+	     :prefix "SPC"
+	     :prefix-map sudo-edit-map
+	     ("s e" . sudo-edit)))
+
 
 (use-package treemacs
   :ensure t
@@ -314,6 +339,27 @@
 (use-package lua-mode)
 (use-package proof-general)
 
+
+(add-hook 'text-mode-hook 'context-menu-mode)
+(add-hook 'prog-mode-hook 'context-menu-mode)
+(add-hook 'org-mode-hook 'context-menu-mode)
+(add-hook 'dired-mode-hook 'context-menu-mode)
+(add-hook 'LaTeX-mode-hook 'context-menu-mode)
+
+
+
+(use-package flyspell
+  :custom
+  (setq ispell-program-name "hunspell")
+  (hunspell-dictionary "en_US")
+  :config
+  (add-hook 'text-mode-hook 'flyspell-mode)
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+  (add-hook 'org-mode-hook 'flyspell-mode)
+  (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+  (add-hook 'markdown-mode-hook 'flyspell-mode))
+
+
 (add-hook 'after-init-hook (lambda () (load-theme 'doom-one t)))
 
 
@@ -352,13 +398,14 @@
 
 (setq native-comp-async-report-warnings-errors 'silent)
 
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(dap-mode ligature sudo-edit deadgrep indent-guide centaur-tabs sublimity zig-mode which-key vterm vertico-posframe spacious-padding solaire-mode rust-mode rainbow-delimiters racket-mode quelpa-use-package python-mode proof-general projectile paredit-menu nix-mode lua-mode lsp-ui lsp-treemacs lsp-haskell idris-mode golden-ratio go-mode doom-themes doom-modeline dired-rsync copilot company-box async all-the-icons-dired))
+   '(flyspell-correct-ivy flyspell-correct dap-mode ligature sudo-edit deadgrep indent-guide centaur-tabs sublimity zig-mode which-key vterm vertico-posframe spacious-padding solaire-mode rust-mode rainbow-delimiters racket-mode quelpa-use-package python-mode proof-general projectile paredit-menu nix-mode lua-mode lsp-ui lsp-treemacs lsp-haskell idris-mode golden-ratio go-mode doom-themes doom-modeline dired-rsync copilot company-box async all-the-icons-dired))
  '(warning-suppress-types
    '(((copilot copilot-no-mode-indent))
      ((copilot copilot-no-mode-indent))
@@ -368,22 +415,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(fringe ((t :background "unspecified-bg")))
- '(header-line ((t :box (:line-width 4 :color "unspecified-bg" :style nil))))
- '(header-line-highlight ((t :box (:color "unspecified-fg"))))
- '(keycast-key ((t)))
- '(line-number ((t :background "unspecified-bg")))
- '(mode-line ((t :box (:line-width 6 :color "unspecified-bg" :style nil))))
- '(mode-line-active ((t)))
- '(mode-line-highlight ((t :box (:color "unspecified-fg"))))
- '(mode-line-inactive ((t :box (:line-width 6 :color nil :style nil))))
- '(tab-bar-tab ((t :box (:line-width 4 :color "grey" :style nil))))
- '(tab-bar-tab-inactive ((t :box (:line-width 4 :color "grey" :style nil))))
- '(tab-line-tab ((t)))
- '(tab-line-tab-active ((t)))
- '(tab-line-tab-inactive ((t)))
- '(vertical-border ((t :background "unspecified-bg" :foreground "unspecified-bg")))
- '(window-divider ((t (:background "unspecified-bg" :foreground "unspecified-bg"))))
- '(window-divider-first-pixel ((t (:background "unspecified-bg" :foreground "unspecified-bg"))))
- '(window-divider-last-pixel ((t (:background "unspecified-bg" :foreground "unspecified-bg")))))
+ )
 

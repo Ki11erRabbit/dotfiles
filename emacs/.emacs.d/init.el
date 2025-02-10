@@ -323,7 +323,7 @@
 (evil-mode 1)
 (evil-select-search-module 'evil-search-module 'evil-search)
 
-(evil-define-key '(motion normal) 'global
+(evil-define-key '(motion normal visual) 'global
 		 "m" 'evil-backward-char
 		 "n" 'evil-next-line
 		 "gn" 'evil-next-visual-line
@@ -336,18 +336,6 @@
 		 "I" 'evil-window-bottom
 		 "K" 'evil-window-middle)
 
-(evil-define-key '(visual) 'visual
-		 "m" 'evil-backward-char
-		 "n" 'evil-next-line
-		 "gn" 'evil-next-visual-line
-		 "e" 'evil-previous-line
-		 "ge" 'evil-previous-visual-line
-		 "i" 'evil-forward-char
-		 "j" 'evil-next-match
-		 "J" 'evil-previous-match
-		 "M" 'evil-window-top
-		 "I" 'evil-window-bottom
-		 "K" 'evil-window-middle)
 
 (evil-define-key '(normal visual) 'global
 		 "t" 'evil-insert

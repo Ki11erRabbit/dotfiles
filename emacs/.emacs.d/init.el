@@ -338,6 +338,7 @@
 (use-package idris-mode)
 (use-package lua-mode)
 (use-package proof-general)
+(use-package nix-mode :mode "\\.nix\\'")
 
 
 (add-hook 'text-mode-hook 'context-menu-mode)

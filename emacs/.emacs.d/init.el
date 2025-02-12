@@ -170,7 +170,10 @@
   (setq evil-want-C-w-in-emacs-state t)
   (setq evil-want-C-w-delete t)
   (setq evil-want-Y-yank-to-eol t)
-  (setq evil-undo-system 'undo-fu))
+  (setq evil-undo-system 'undo-fu)
+  :config
+  (evil-mode 1)
+  (evil-select-search-module 'evil-search-module 'evil-search))
 
 (use-package evil-collection
   :after evil
@@ -384,8 +387,6 @@
 (delete-selection-mode 1)
 
 
-(evil-mode 1)
-(evil-select-search-module 'evil-search-module 'evil-search)
 
 (evil-define-key '(motion normal visual) 'global
 		 "m" 'evil-backward-char

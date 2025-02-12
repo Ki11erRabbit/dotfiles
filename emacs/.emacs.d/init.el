@@ -86,6 +86,7 @@
   :demand
   :config
   (centaur-tabs-mode t)
+  (setq centaur-tabs-set-icons t)
   :bind
   ("C-<prior>" . centaur-tabs-backward)
   ("C-<next>" . centaur-tabs-forward))
@@ -183,6 +184,22 @@
   :config
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
+
+(use-package esh-autosuggest
+  :ensure t
+  :after esh
+  :config
+  (eshell-mode . esh-autosuggest-mode))
+
+(use-package evil-nerd-commenter)
+
+(use-package emacs-dashboard
+  :ensure t
+  :config
+  :(dashboard-setup-startup-hook))
+
+(use-package emojify
+  :hook (after-init . global-emojify-mode))
 
 (use-package golden-ratio
   :ensure t

@@ -463,8 +463,23 @@
     (kbd "M-n") 'company-select-next
     (kbd "M-e") 'company-select-previous)
 
+;; Evil EShell keybindings
+(evil-define-key 'normal eshell-mode-map "C-n" 'eshell-next-prompt)
+(evil-define-key 'normal eshell-mode-map "C-e" 'eshell-previous-prompt)
+(evil-define-key 'normal eshell-mode-map "M-m" 'eshell-backward-argument)
+(evil-define-key 'normal eshell-mode-map "M-i" 'eshell-forward-argument)
+(evil-define-key 'normal eshell-mode-map "C-m" 'eshell-prevous-matching-input-from-input)
+(evil-define-key 'normal eshell-mode-map "C-i" 'eshell-next-matching-input-from-input)
 
+(evil-define-key 'visual eshell-mode-map "C-n" 'eshell-next-prompt)
+(evil-define-key 'visual eshell-mode-map "C-e" 'eshell-previous-prompt)
 
+;; Evil Dashboard keybindings
+(evil-define-key 'normal 'dashboard-mode-map "s" (symbol-function (lookup-key dashboard-mode-map "e")))
+(evil-define-key 'normal 'dashboard-mode-map "n" 'dashboard-next-line)
+(evil-define-key 'normal 'dashboard-mode-map "e" 'dashboard-previous-line)
+(evil-define-key 'normal 'dashboard-mode-map "gn" 'dashboard-next-section)
+(evil-define-key 'normal 'dashboard-mode-map "ge" 'dashboard-previous-section)
 
 (setq native-comp-async-report-warnings-errors 'silent)
 

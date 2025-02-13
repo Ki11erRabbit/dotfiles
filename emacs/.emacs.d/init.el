@@ -93,9 +93,7 @@
 
 (use-package company
   :ensure t
-  :hook (after-init . global-company-mode)
-  :config
-  (evil-define-key 'normal company-active-map "C-e" 'company-select-previous))
+  :hook (after-init . global-company-mode))
 
 (use-package company-box
   :hook (company-mode . company-box-mode))
@@ -448,6 +446,26 @@
 ;; Evil EWW keybindings
 (evil-define-key 'normal eww-mode-map "M" 'eww-back-url)
 (evil-define-key 'normal eww-mode-map "I" 'eww-forward-url)
+
+;; Evil Dired keybindings
+(evil-define-key 'normal dired-mode-map "n" 'dired-next-line)
+(evil-define-key 'normal dired-mode-map "e" 'dired-previous-line)
+
+;; Evil Company keybindings
+(evil-collection-define-key nil 'company-active-map
+    (kbd "C-n") 'company-select-next-or-abort
+    (kbd "C-p") 'company-select-previous-or-abort
+    (kbd "C-n") 'company-select-next-or-abort
+    (kbd "C-e") 'company-select-previous-or-abort
+    (kbd "M-n") 'company-select-next
+    (kbd "M-e") 'company-select-previous)
+(evil-collection-define-key nil 'company-search-map
+    (kbd "C-n") 'company-select-next-or-abort
+    (kbd "C-e") 'company-select-previous-or-abort
+    (kbd "M-n") 'company-select-next
+    (kbd "M-e") 'company-select-previous)
+
+
 
 
 (setq native-comp-async-report-warnings-errors 'silent)

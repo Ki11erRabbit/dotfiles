@@ -481,6 +481,16 @@
 (evil-define-key 'normal 'dashboard-mode-map "gn" 'dashboard-next-section)
 (evil-define-key 'normal 'dashboard-mode-map "ge" 'dashboard-previous-section)
 
+;; Evil VTerm keybindings
+(evil-define-key 'normal vterm-mode-map "t" 'evil-collection-vterm-insert)
+(evil-define-key 'normal vterm-mode-map "T" 'evil-collection-vterm-insert-line)
+(evil-define-key 'normal vterm-mode-map "n" 'evil-collection-vterm-next-line)
+
+;; Evil Go-mode keybindings
+(evil-define-key 'normal go-mode-map "E" 'godef-describe)
+
+;; Evil Org-mode keybindings
+
 (setq native-comp-async-report-warnings-errors 'silent)
 
 

@@ -95,7 +95,7 @@
   :ensure t
   :hook (after-init . global-company-mode)
   :config
-  (define-key company-select-previous company-active-map (kbd "C-e")))
+  (evil-define-key 'normal company-active-map "C-e" 'company-select-previous))
 
 (use-package company-box
   :hook (company-mode . company-box-mode))
@@ -390,7 +390,21 @@
 
 
 
-(evil-define-key '(motion normal visual) 'global
+(evil-define-key 'normal 'evil-normal-state-map
+		 "m" 'evil-backward-char
+		 "n" 'evil-next-line
+		 "gn" 'evil-next-line
+		 "e" 'evil-previous-line
+		 "ge" 'evil-previous-line
+		 "i" 'evil-forward-char
+		 "j" 'evil-next-match
+		 "J" 'evil-previous-match
+		 "M" 'evil-window-top
+		 "I" 'evil-window-bottom
+		 "K" 'evil-window-middle)
+
+
+(evil-define-key 'visual 'evil-visual-state-map
 		 "m" 'evil-backward-char
 		 "n" 'evil-next-line
 		 "gn" 'evil-next-visual-line
@@ -430,6 +444,10 @@
 (evil-define-key 'normal magit-mode-map "M-e" 'magit-ediff)
 (evil-define-key 'normal magit-mode-map "M-E" 'magit-ediff)
 (evil-define-key 'normal magit-mode-map "M-i" 'magit-gitignore)
+
+;; Evil EWW keybindings
+(evil-define-key 'normal eww-mode-map "M" 'eww-back-url)
+(evil-define-key 'normal eww-mode-map "I" 'eww-forward-url)
 
 
 (setq native-comp-async-report-warnings-errors 'silent)

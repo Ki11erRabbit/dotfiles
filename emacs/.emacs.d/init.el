@@ -93,7 +93,9 @@
 
 (use-package company
   :ensure t
-  :hook (after-init . global-company-mode))
+  :hook (after-init . global-company-mode)
+  :config
+  (define-key company-select-previous company-active-map (kbd "C-e")))
 
 (use-package company-box
   :hook (company-mode . company-box-mode))

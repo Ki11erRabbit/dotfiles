@@ -417,6 +417,21 @@
 	   ("e" . evil-window-up)
 	   ("i" . evil-window-right))
 
+;; Evil magit keybindings
+(evil-define-key 'normal magit-mode-map "n" 'evil-next-visual-line)
+(evil-define-key 'normal magit-mode-map "e" 'evil-previous-visual-line)
+(evil-define-key 'normal magit-mode-map "m" 'evil-backward-char)
+(evil-define-key 'normal magit-mode-map "i" 'evil-forward-char)
+(evil-define-key 'normal magit-mode-map "C-n" 'magit-section-forward)
+(evil-define-key 'normal magit-mode-map "C-e" 'magit-section-backward)
+(evil-define-key 'normal magit-mode-map "j" 'evil-search-next)
+(evil-define-key 'normal magit-mode-map "J" 'evil-search-previous)
+(evil-define-key 'normal magit-mode-map "M-m" 'magit-merge)
+(evil-define-key 'normal magit-mode-map "M-e" 'magit-ediff)
+(evil-define-key 'normal magit-mode-map "M-E" 'magit-ediff)
+(evil-define-key 'normal magit-mode-map "M-i" 'magit-gitignore)
+
+
 (setq native-comp-async-report-warnings-errors 'silent)
 
 

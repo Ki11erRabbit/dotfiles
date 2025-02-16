@@ -409,6 +409,8 @@
 		 "e" 'evil-previous-line
 		 "ge" 'evil-previous-visual-line
 		 "i" 'evil-forward-char
+		 "j" 'evil-next-match
+		 "J" 'evil-previous-match
 		 "M" 'evil-window-top
 		 "I" 'evil-window-bottom
 		 "K" 'evil-window-middle)

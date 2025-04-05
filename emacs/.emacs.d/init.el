@@ -108,14 +108,14 @@
   :ensure t
   :hook (LaTeX-mode . turn-on-cdlatex))
 
-(quelpa '(copilot
-	  :fetcher github
-	  :repo "copilot-emacs/copilot.el"
-	  :branch "main"
-	  :files ("*.el")))
-(require 'copilot)
-(add-hook 'prog-mode-hook 'copilot-mode)
-(define-key copilot-completion-map (kbd "C-<tab>") 'copilot-accept-completion)
+;(quelpa '(copilot
+;	  :fetcher github
+;	  :repo "copilot-emacs/copilot.el"
+;	  :branch "main"
+;	  :files ("*.el")))
+;(require 'copilot)
+;(add-hook 'prog-mode-hook 'copilot-mode)
+;(define-key copilot-completion-map (kbd "C-<tab>") 'copilot-accept-completion)
 
 (use-package dap-mode
         :ensure t
@@ -200,9 +200,6 @@
   :ensure t
   :config
   :(dashboard-setup-startup-hook))
-
-(use-package emojify
-  :hook (after-init . global-emojify-mode))
 
 (use-package golden-ratio
   :ensure t

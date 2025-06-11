@@ -18,7 +18,8 @@ if vim.g.vscode then
 
 else
     require('lsp')
-    vim.cmd('colorscheme doom-one')
+    vim.cmd('colorscheme catppuccin-latte')
+    --, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
 end
 
 require('config')

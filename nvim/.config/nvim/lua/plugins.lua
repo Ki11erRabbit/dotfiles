@@ -7,7 +7,8 @@ plugins = {
         dependencies = { 'nvim-tree/nvim-web-devicons'}
     },
     --'NTBBloodbath/doom-one.nvim',
-    'romgrk/doom-one.vim',
+    --'romgrk/doom-one.vim',
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
     "neovim/nvim-lspconfig",
     "hrsh7th/nvim-cmp",
     "hrsh7th/cmp-nvim-lsp",
@@ -97,4 +98,5 @@ plugins = {
 }
 
 require('lazy').setup(plugins)
+require('catppuccin')
 

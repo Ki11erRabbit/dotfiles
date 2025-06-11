@@ -155,11 +155,13 @@
   (doom-modeline-time t)
   (doom-modeline-vcs-max-length 50))
 
-(use-package doom-themes
-  :ensure t
-  :config
-  (doom-themes-org-config)
-  (doom-themes-visual-bell-config))
+;(use-package doom-themes
+;  :ensure t
+;  :config
+;  (doom-themes-org-config)
+;  (doom-themes-visual-bell-config))
+
+(use-package 'catppuccin-theme)
 
 (use-package evil
   :init
@@ -377,8 +379,8 @@
   (add-hook 'LaTeX-mode-hook 'flyspell-mode)
   (add-hook 'markdown-mode-hook 'flyspell-mode))
 
-
-(add-hook 'after-init-hook (lambda () (load-theme 'doom-one t)))
+(setq catppuccin-flavor 'latte)
+(add-hook 'after-init-hook (lambda () (load-theme 'catppuccin t)))
 
 
 (delete-selection-mode 1)

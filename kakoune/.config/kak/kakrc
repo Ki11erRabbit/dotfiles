@@ -1,5 +1,6 @@
 # Set the colour scheme
-colorscheme doom-one
+#colorscheme doom-one
+colorscheme catppuccin_latte
 
 # Width of a tab
 set-option global tabstop 4
@@ -106,7 +107,6 @@ hook global WinSetOption filetype=coq %{
 }
 
 
-
 bundle kakoune-lsp https://github.com/kakoune-lsp/kakoune-lsp %{
 }
 bundle-install-hook kakoune-lsp %{
@@ -123,7 +123,6 @@ hook global WinSetOption filetype=<language> %{
     remove-hooks window semantic-tokens
   }
 }
-
 
 
 

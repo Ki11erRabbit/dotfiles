@@ -1,0 +1,1 @@
+/home/ki11errabbit/.config/kak/bundle/catppuccin_latte.kak

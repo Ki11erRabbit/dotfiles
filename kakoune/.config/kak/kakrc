@@ -1,3 +1,9 @@
+
+# nop %sh{
+#     mkdir -p "$kak_config/autoload"
+#     ln -s "$kak_runtime/rc" "$kak_config/autoload/standard-library"
+# }
+
 # Set the colour scheme
 #colorscheme doom-one
 colorscheme catppuccin_latte
@@ -78,6 +84,12 @@ bundle kak-rainbow https://github.com/Bodhizafa/kak-rainbow %{
 	hook global WinSetOption filetype=(koka|rust|python|c|c++|scheme|lisp|clojure|javascript|json|coq) %{
         rainbow-enable-window
 	}
+}
+
+bundle kak-tree-sitter https://sr.ht/~hadronized/kak-tree-sitter/
+bundle-install-hook kak-tree-sitter %{
+    cargo install kak-tree-sitter
+    cargo install ktsctl
 }
 
 bundle coqoune https://github.com/guest0x0/coqoune %{}

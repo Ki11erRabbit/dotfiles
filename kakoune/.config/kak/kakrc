@@ -4,9 +4,6 @@
 #     ln -s "$kak_runtime/rc" "$kak_config/autoload/standard-library"
 # }
 
-# Set the colour scheme
-#colorscheme doom-one
-colorscheme catppuccin_latte
 
 # Width of a tab
 set-option global tabstop 4
@@ -81,9 +78,10 @@ bundle-install-hook parinfer-rust %{
 }
 
 bundle kak-rainbow https://github.com/Bodhizafa/kak-rainbow %{
-	hook global WinSetOption filetype=(koka|rust|python|c|c++|scheme|lisp|clojure|javascript|json|coq) %{
+	hook global WinSetOption filetype=(koka|rust|python|c|c\+\+|scheme|lisp|clojure|javascript|json|coq) %{
         rainbow-enable-window
 	}
+	set-option rainbow_colors '#8839ef #ea76cb #dd7878 #e64553 #d20f39 #fe640b #df8e1d #40a02b #179299 #209fb5 #04a5e5 #1e66f5 #7287fd'
 }
 
 bundle kak-tree-sitter https://sr.ht/~hadronized/kak-tree-sitter/
@@ -120,12 +118,12 @@ hook global WinSetOption filetype=coq %{
 
 
 bundle kakoune-lsp https://github.com/kakoune-lsp/kakoune-lsp %{
+	eval %sh{kak-lsp --kakoune -s $kak_session}  # Not needed if you load it with plug.kak.
+	lsp-enable
 }
 bundle-install-hook kakoune-lsp %{
     cargo install --locked --force --path .
 }
-eval %sh{kak-lsp --kakoune -s $kak_session}  # Not needed if you load it with plug.kak.
-lsp-enable
 
 hook global WinSetOption filetype=<language> %{
   hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
@@ -136,7 +134,11 @@ hook global WinSetOption filetype=<language> %{
   }
 }
 
+eval %sh{ kak-tree-sitter -dks --init $kak_session --with-text-objects -vvvvv }
 
+# Set the colour scheme
+#colorscheme doom-one
+colorscheme catppuccin_latte
 
 
 

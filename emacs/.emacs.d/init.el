@@ -161,7 +161,7 @@
 ;  (doom-themes-org-config)
 ;  (doom-themes-visual-bell-config))
 
-(use-package 'catppuccin-theme)
+(use-package catppuccin-theme)
 
 (use-package evil
   :init

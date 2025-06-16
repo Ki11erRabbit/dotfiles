@@ -198,10 +198,10 @@
 
 (use-package evil-nerd-commenter)
 
-(use-package emacs-dashboard
-  :ensure t
-  :config
-  :(dashboard-setup-startup-hook))
+;(use-package dashboard
+;  :ensure t
+;  :config
+;  :(dashboard-setup-startup-hook))
 
 (use-package golden-ratio
   :ensure t
@@ -476,7 +476,7 @@
 (evil-define-key 'visual eshell-mode-map "C-e" 'eshell-previous-prompt)
 
 ;; Evil Dashboard keybindings
-(evil-define-key 'normal 'dashboard-mode-map "s" (symbol-function (lookup-key dashboard-mode-map "e")))
+;(evil-define-key 'normal 'dashboard-mode-map "s" (symbol-function (lookup-key dashboard-mode-map "e")))
 (evil-define-key 'normal 'dashboard-mode-map "n" 'dashboard-next-line)
 (evil-define-key 'normal 'dashboard-mode-map "e" 'dashboard-previous-line)
 (evil-define-key 'normal 'dashboard-mode-map "gn" 'dashboard-next-section)

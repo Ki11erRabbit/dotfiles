@@ -49,8 +49,6 @@ define-command expandtab %{
 }
 
 
-hook global WinSetOption filetype=* expandtab
-
 evaluate-commands %sh{
   # We're assuming the default bundle_path here...
   plugins="$kak_config/bundle"
@@ -65,6 +63,29 @@ bundle-noload kak-bundle https://github.com/jdugan6240/kak-bundle
 bundle kakboard https://github.com/lePerdu/kakboard/ %{
     hook global WinCreate .* %{ kakboard-enable }
 }
+
+bundle smarttab.kak https://github.com/andreyorst/smarttab.kak %{
+    set-option global softtabstop 4
+    hook global WinSetOption filetype=* expandtab
+    hook global WinSetOption filetype=makefile noexpandtab
+    hook global BufOpenFile .* %{
+        editorconfig-load
+        autoconfigtab
+    }
+    hook global BufNewFile .* expandtab
+    hook global BufNewFile Makefile noexpandtab
+    hook global BufNewFile makefile noexpandtab
+}
+
+    hook global WinSetOption filetype=* expandtab
+    hook global WinSetOption filetype=makefile noexpandtab
+    hook global BufOpenFile .* %{
+        editorconfig-load
+        autoconfigtab
+    }
+    hook global BufNewFile .* expandtab
+    hook global BufNewFile Makefile noexpandtab
+    hook global BufNewFile makefile noexpandtab
 
 bundle kakoune-registers https://github.com/Delapouite/kakoune-registers
 

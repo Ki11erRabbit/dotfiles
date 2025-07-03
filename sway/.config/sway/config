@@ -1,0 +1,145 @@
+font pango:monospace 8.000000
+floating_modifier Mod4
+default_border normal 2
+default_floating_border normal 2
+hide_edge_borders none
+focus_wrapping no
+focus_follows_mouse yes
+focus_on_window_activation smart
+mouse_warping output
+workspace_layout default
+workspace_auto_back_and_forth no
+client.focused #ea76cb #eff1f5 #4c4f69 #ea76cb #ea76cb
+client.focused_inactive #9ca0b0 #eff1f5 #4c4f69 #9ca0b0 #9ca0b0
+client.unfocused #9ca0b0 #eff1f5 #4c4f69 #9ca0b0 #9ca0b0
+client.urgent #d20f39 #eff1f5 #4c4f69 #d20f39 #d20f39
+client.placeholder #9ca0b0 #eff1f5 #4c4f69 #9ca0b0 #9ca0b0
+client.background #eff1f5
+
+bindsym Mod4+0 exec 'swaysome focus 0'
+bindsym Mod4+1 exec 'swaysome focus 1'
+bindsym Mod4+2 exec 'swaysome focus 2'
+bindsym Mod4+3 exec 'swaysome focus 3'
+bindsym Mod4+4 exec 'swaysome focus 4'
+bindsym Mod4+5 exec 'swaysome focus 5'
+bindsym Mod4+6 exec 'swaysome focus 6'
+bindsym Mod4+7 exec 'swaysome focus 7'
+bindsym Mod4+8 exec 'swaysome focus 8'
+bindsym Mod4+9 exec 'swaysome focus 9'
+bindsym Mod4+Ctrl+e resize set height 10pt
+bindsym Mod4+Ctrl+i resize set height -10pt
+bindsym Mod4+Ctrl+m resize set width -10pt
+bindsym Mod4+Ctrl+n resize set width 10pt
+bindsym Mod4+Return exec alacritty
+bindsym Mod4+Shift+0 exec 'swaysome move 0'
+bindsym Mod4+Shift+1 exec 'swaysome move 1'
+bindsym Mod4+Shift+2 exec 'swaysome move 2'
+bindsym Mod4+Shift+3 exec 'swaysome move 3'
+bindsym Mod4+Shift+4 exec 'swaysome move 4'
+bindsym Mod4+Shift+5 exec 'swaysome move 5'
+bindsym Mod4+Shift+6 exec 'swaysome move 6'
+bindsym Mod4+Shift+7 exec 'swaysome move 7'
+bindsym Mod4+Shift+8 exec 'swaysome move 8'
+bindsym Mod4+Shift+9 exec 'swaysome move 9'
+bindsym Mod4+Shift+Return exec emacsclient -c -a 'emacs'
+bindsym Mod4+Shift+comma exec 'swaysome prev-output'
+bindsym Mod4+Shift+e move up
+bindsym Mod4+Shift+i move right
+bindsym Mod4+Shift+m move left
+bindsym Mod4+Shift+minus move scratchpad
+bindsym Mod4+Shift+n move down
+bindsym Mod4+Shift+period exec 'swaysome next-output'
+bindsym Mod4+Shift+q exec swaymsg exit
+bindsym Mod4+Shift+r reload
+bindsym Mod4+Shift+s exec grimshot copy area
+bindsym Mod4+Shift+space floating toggle
+bindsym Mod4+a layout stacking
+bindsym Mod4+d exec bemenu-run
+bindsym Mod4+e focus up
+bindsym Mod4+f fullscreen toggle
+bindsym Mod4+h splith
+bindsym Mod4+i focus right
+bindsym Mod4+m focus left
+bindsym Mod4+minus scratchpad show
+bindsym Mod4+n focus down
+bindsym Mod4+p layout toggle split
+bindsym Mod4+q kill
+bindsym Mod4+r exec nemo
+bindsym Mod4+s exec grimshot save area
+bindsym Mod4+space focus mode_toggle
+bindsym Mod4+t layout tabbed
+bindsym Mod4+v splitv
+bindsym XF86AudioLowerVolume exec 'pamixer -d 3'
+bindsym XF86AudioMute exec 'pamixer --toggle-mute'
+bindsym XF86AudioRaiseVolume exec 'pamixer -i 3'
+
+mode "resize" {
+  bindsym Down resize grow height 10 px
+  bindsym Escape mode default
+  bindsym Left resize shrink width 10 px
+  bindsym Return mode default
+  bindsym Right resize grow width 10 px
+  bindsym Up resize shrink height 10 px
+  bindsym e resize shrink height 10 px
+  bindsym i resize grow width 10 px
+  bindsym m resize shrink width 10 px
+  bindsym n resize grow height 10 px
+}
+
+gaps inner 10
+gaps outer 10
+exec waybar
+
+exec fnott
+
+exec configure-monitors.sh
+
+exec setup-wallpaper.sh
+
+exec setup-swayidle.sh
+
+exec setup-keyboard.sh
+
+exec nm-applet
+
+exec blueman-applet
+
+exec kdeconnect-indicator
+
+exec swaysome init 1
+
+workspace "1" output "DP-1"
+workspace "2" output "DP-1"
+workspace "3" output "DP-1"
+workspace "4" output "DP-1"
+workspace "5" output "DP-1"
+workspace "6" output "DP-1"
+workspace "7" output "DP-1"
+workspace "8" output "DP-1"
+workspace "9" output "DP-1"
+workspace "10" output "DP-1"
+workspace "11" output "DP-2"
+workspace "12" output "DP-2"
+workspace "13" output "DP-2"
+workspace "14" output "DP-2"
+workspace "15" output "DP-2"
+workspace "16" output "DP-2"
+workspace "17" output "DP-2"
+workspace "18" output "DP-2"
+workspace "19" output "DP-2"
+workspace "20" output "DP-2"
+workspace "21" output "HDMI-A-1"
+workspace "22" output "HDMI-A-1"
+workspace "23" output "HDMI-A-1"
+workspace "24" output "HDMI-A-1"
+workspace "25" output "HDMI-A-1"
+workspace "26" output "HDMI-A-1"
+workspace "27" output "HDMI-A-1"
+workspace "28" output "HDMI-A-1"
+workspace "29" output "HDMI-A-1"
+workspace "30" output "HDMI-A-1"
+exec "/nix/store/rys6134aqazihxi4g5ayc0ky829v7mf0-dbus-1.14.10/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP XDG_SESSION_TYPE NIXOS_OZONE_WL XCURSOR_THEME XCURSOR_SIZE; systemctl --user reset-failed && systemctl --user start sway-session.target && swaymsg -mt subscribe '[]' || true && systemctl --user stop sway-session.target"
+corner_radius 10
+shadows enable
+shadow_blur_radius 50
+

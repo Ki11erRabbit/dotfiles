@@ -1,3 +1,10 @@
+(cond
+   ((string-equal system-type "darwin")
+        (setenv "PATH" "/Users/ki11errabbit/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Applications/Ghostty.app/Contents/MacOS")
+        (setq exec-path (split-string (getenv "PATH") path-separator))
+    )
+)
+
 (eval-and-compile
   (require 'package)
   (setq package-archives '(("elpa" . "https://elpa.gnu.org/packages/")
@@ -222,25 +229,6 @@
   :config
   (lispyville-set-key-theme '(operators c-w additional)))
 
-
-(use-package ligature
-  :config
-  (ligature-set-ligatures 'prog-mode '("--" "---" "==" "===" "!=" "!==" "=!="
-                              "=:=" "=/=" "<=" ">=" "&&" "&&&" "&=" "++" "+++" "***" ";;" "!!"
-                              "??" "???" "?:" "?." "?=" "<:" ":<" ":>" ">:" "<:<" "<>" "<<<" ">>>"
-                              "<<" ">>" "||" "-|" "_|_" "|-" "||-" "|=" "||=" "##" "###" "####"
-                              "#{" "#[" "]#" "#(" "#?" "#_" "#_(" "#:" "#!" "#=" "^=" "<$>" "<$"
-                              "$>" "<+>" "<+" "+>" "<*>" "<*" "*>" "</" "</>" "/>" "<!--" "<#--"
-                              "-->" "->" "->>" "<<-" "<-" "<=<" "=<<" "<<=" "<==" "<=>" "<==>"
-                              "==>" "=>" "=>>" ">=>" ">>=" ">>-" ">-" "-<" "-<<" ">->" "<-<" "<-|"
-                              "<=|" "|=>" "|->" "<->" "<~~" "<~" "<~>" "~~" "~~>" "~>" "~-" "-~"
-                              "~@" "[||]" "|]" "[|" "|}" "{|" "[<" ">]" "|>" "<|" "||>" "<||"
-                              "|||>" "<|||" "<|>" "..." ".." ".=" "..<" ".?" "::" ":::" ":=" "::="
-                              ":?" ":?>" "//" "///" "/*" "*/" "/=" "//=" "/==" "@_" "__" "???"
-                              "<:<" ";;;"))
-  (global-ligature-mode t))
-
-
 (use-package lsp-haskell
   :ensure t
   :hook (haskell-mode . lsp)
@@ -299,16 +287,6 @@
 (use-package rainbow-mode
   :hook (prog-mode . rainbow-mode))
 
-(use-package solaire-mode
-  :ensure t
-  :hook (after-init . solaire-global-mode)
-  :config
-  (push '(treemacs-window-background-face . solaire-default-face) solaire-mode-remap-alist)
-  (push '(treemacs-hl-line-face . solaire-hl-line-face) solaire-mode-remap-alist))
-
-(use-package spacious-padding
-  :ensure t
-  :hook (after-init . spacious-padding-mode))
 
 (use-package sudo-edit
   :config
@@ -493,15 +471,14 @@
 ;; Evil Org-mode keybindings
 
 (setq native-comp-async-report-warnings-errors 'silent)
-
+(setq native-comp-deferred-compilation t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(flyspell-correct-ivy flyspell-correct dap-mode ligature sudo-edit deadgrep indent-guide centaur-tabs sublimity zig-mode which-key vterm vertico-posframe spacious-padding solaire-mode rust-mode rainbow-delimiters racket-mode quelpa-use-package python-mode proof-general projectile paredit-menu nix-mode lua-mode lsp-ui lsp-treemacs lsp-haskell idris-mode golden-ratio go-mode doom-themes doom-modeline dired-rsync copilot company-box async all-the-icons-dired))
+ '(package-selected-packages nil)
  '(warning-suppress-types
    '(((copilot copilot-no-mode-indent))
      ((copilot copilot-no-mode-indent))

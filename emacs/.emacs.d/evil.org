@@ -1,0 +1,236 @@
+#+TITLE: Evil Mode Configuration
+#+AUTHOR: ki11errabbit
+#+PROPERTY: header-args:emacs-lisp :tangle ~/.emacs.d/evil.el
+#+STARTUP: overview
+
+* Table of Contents :TOC:
+- [[#introduction][Introduction]]
+- [[#evil-core][Evil Core]]
+  - [[#evil-initialization][Evil Initialization]]
+  - [[#evil-collection][Evil Collection]]
+  - [[#evil-org][Evil Org]]
+- [[#evil-editing-packages][Evil Editing Packages]]
+  - [[#undo-fu][Undo Fu]]
+  - [[#lispyville][Lispyville]]
+  - [[#evil-nerd-commenter][Evil Nerd Commenter]]
+- [[#custom-keybindings][Custom Keybindings]]
+  - [[#custom-keyboard-layout][Custom Keyboard Layout]]
+  - [[#window-navigation][Window Navigation]]
+  - [[#mode-specific-bindings][Mode Specific Bindings]]
+  - [[#load-extended-bindings][Load Extended Bindings]]
+
+* Introduction
+
+This file contains all Evil mode related configuration, including:
+- Evil mode core setup
+- Evil-related packages (collection, org, lispyville, etc.)
+- Custom keybindings for custom keyboard layout (m=left, n=down, e=up, i=right)
+- Mode-specific Evil bindings
+
+This is loaded from the main config.el after basic settings are configured.
+
+* Evil Core
+
+** Evil Initialization
+
+Configure Evil mode settings before loading.
+
+#+begin_src emacs-lisp
+(setq evil-want-keybinding nil)
+
+(use-package evil
+  :init
+  (setq evil-want-C-u-scroll t)
+  (setq evil-want-C-i-jump t)
+  (setq evil-want-C-w-scroll t)
+  (setq evil-want-C-w-in-emacs-state t)
+  (setq evil-want-C-w-delete t)
+  (setq evil-want-Y-yank-to-eol t)
+  (setq evil-undo-system 'undo-fu)
+  :config
+  (evil-mode 1)
+  (evil-select-search-module 'evil-search-module 'evil-search))
+#+end_src
+
+** Evil Collection
+
+Enable Evil bindings for many Emacs modes.
+
+#+begin_src emacs-lisp
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
+#+end_src
+
+** Evil Org
+
+Special Evil bindings for Org mode.
+
+#+begin_src emacs-lisp
+(use-package evil-org
+  :after org
+  :hook (org-mode . evil-org-mode)
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+#+end_src
+
+* Evil Editing Packages
+
+** Undo Fu
+
+Better undo system for Evil mode.
+
+#+begin_src emacs-lisp
+(use-package undo-fu)
+#+end_src
+
+** Lispyville
+
+Lisp editing enhancements for Evil mode.
+
+#+begin_src emacs-lisp
+(use-package lispyville
+  :hook (emacs-lisp-mode . lispyville-mode)
+  :hook (scheme-mode . lispyville-mode)
+  :hook (racket-mode . lispyville-mode)
+  :hook (lisp-mode . lispyville-mode)
+  :hook (clojure-mode . lispyville-mode)
+  :config
+  (lispyville-set-key-theme '(operators c-w additional)))
+#+end_src
+
+** Evil Nerd Commenter
+
+Easy commenting with Evil mode.
+
+#+begin_src emacs-lisp
+(use-package evil-nerd-commenter)
+#+end_src
+
+* Custom Keybindings
+
+All custom keybindings for the custom keyboard layout.
+
+** Custom Keyboard Layout
+
+Core movement bindings for custom layout (m=left, n=down, e=up, i=right).
+
+#+begin_src emacs-lisp
+(evil-define-key 'normal 'evil-normal-state-map
+  "m" 'evil-backward-char
+  "n" 'evil-next-line
+  "gn" 'evil-next-line
+  "e" 'evil-previous-line
+  "ge" 'evil-previous-line
+  "i" 'evil-forward-char
+  "j" 'evil-search-next
+  "J" 'evil-search-previous
+  "M" 'evil-window-top
+  "I" 'evil-window-bottom
+  "K" 'evil-window-middle)
+
+(evil-define-key 'visual 'evil-visual-state-map
+  "m" 'evil-backward-char
+  "n" 'evil-next-line
+  "gn" 'evil-next-visual-line
+  "e" 'evil-previous-line
+  "ge" 'evil-previous-visual-line
+  "i" 'evil-forward-char
+  "j" 'evil-search-next
+  "J" 'evil-search-previous
+  "M" 'evil-window-top
+  "I" 'evil-window-bottom
+  "K" 'evil-window-middle)
+
+(evil-define-key '(normal visual) 'global
+  "t" 'evil-insert
+  "T" 'evil-insert-line)
+#+end_src
+
+** Window Navigation
+
+Custom window navigation bindings.
+
+#+begin_src emacs-lisp
+(use-package bind-key)
+
+(bind-keys :map evil-normal-state-map
+           :prefix "C-w"
+           :prefix-map my-prefix-map
+           ("m" . evil-window-left)
+           ("n" . evil-window-down)
+           ("e" . evil-window-up)
+           ("i" . evil-window-right))
+#+end_src
+
+** Mode Specific Bindings
+
+Keybindings for specific modes that need custom layout support.
+
+#+begin_src emacs-lisp
+;; Magit
+(evil-define-key 'normal magit-mode-map "n" 'evil-next-visual-line)
+(evil-define-key 'normal magit-mode-map "e" 'evil-previous-visual-line)
+(evil-define-key 'normal magit-mode-map "m" 'evil-backward-char)
+(evil-define-key 'normal magit-mode-map "i" 'evil-forward-char)
+(evil-define-key 'normal magit-mode-map "C-n" 'magit-section-forward)
+(evil-define-key 'normal magit-mode-map "C-e" 'magit-section-backward)
+(evil-define-key 'normal magit-mode-map "j" 'evil-search-next)
+(evil-define-key 'normal magit-mode-map "J" 'evil-search-previous)
+(evil-define-key 'normal magit-mode-map "M-m" 'magit-merge)
+(evil-define-key 'normal magit-mode-map "M-e" 'magit-ediff)
+(evil-define-key 'normal magit-mode-map "M-E" 'magit-ediff)
+(evil-define-key 'normal magit-mode-map "M-i" 'magit-gitignore)
+
+;; EWW
+(evil-define-key 'normal eww-mode-map "M" 'eww-back-url)
+(evil-define-key 'normal eww-mode-map "I" 'eww-forward-url)
+
+;; Dired
+(evil-define-key 'normal dired-mode-map "n" 'dired-next-line)
+(evil-define-key 'normal dired-mode-map "e" 'dired-previous-line)
+
+;; Company
+(evil-collection-define-key nil 'company-active-map
+  (kbd "C-n") 'company-select-next-or-abort
+  (kbd "C-p") 'company-select-previous-or-abort
+  (kbd "C-e") 'company-select-previous-or-abort
+  (kbd "M-n") 'company-select-next
+  (kbd "M-e") 'company-select-previous)
+
+(evil-collection-define-key nil 'company-search-map
+  (kbd "C-n") 'company-select-next-or-abort
+  (kbd "C-e") 'company-select-previous-or-abort
+  (kbd "M-n") 'company-select-next
+  (kbd "M-e") 'company-select-previous)
+
+;; Eshell
+(evil-define-key 'normal eshell-mode-map "C-n" 'eshell-next-prompt)
+(evil-define-key 'normal eshell-mode-map "C-e" 'eshell-previous-prompt)
+(evil-define-key 'normal eshell-mode-map "M-m" 'eshell-backward-argument)
+(evil-define-key 'normal eshell-mode-map "M-i" 'eshell-forward-argument)
+(evil-define-key 'normal eshell-mode-map "C-m" 'eshell-prevous-matching-input-from-input)
+(evil-define-key 'normal eshell-mode-map "C-i" 'eshell-next-matching-input-from-input)
+
+(evil-define-key 'visual eshell-mode-map "C-n" 'eshell-next-prompt)
+(evil-define-key 'visual eshell-mode-map "C-e" 'eshell-previous-prompt)
+
+;; VTerm
+(evil-define-key 'normal vterm-mode-map "t" 'evil-collection-vterm-insert)
+(evil-define-key 'normal vterm-mode-map "T" 'evil-collection-vterm-insert-line)
+(evil-define-key 'normal vterm-mode-map "n" 'evil-collection-vterm-next-line)
+
+;; Go mode
+(evil-define-key 'normal go-mode-map "E" 'godef-describe)
+#+end_src
+
+** Load Extended Bindings
+
+Load the comprehensive evil-custom-bindings.el file with additional mode bindings.
+
+#+begin_src emacs-lisp
+(load-file "~/.emacs.d/evil-custom-bindings.el")
+#+end_src

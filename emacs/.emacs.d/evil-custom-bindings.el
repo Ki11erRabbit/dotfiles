@@ -238,9 +238,12 @@
 (with-eval-after-load 'diff-hl
   (evil-define-key 'normal 'global
     "[c" 'diff-hl-previous-hunk
-    "]c" 'diff-hl-next-hunk
-    "C-c v n" 'diff-hl-next-hunk
-    "C-c v e" 'diff-hl-previous-hunk))
+    "]c" 'diff-hl-next-hunk)
+  
+  ;; Use define-key for the C-c v prefix bindings
+  (with-eval-after-load 'evil
+    (define-key evil-normal-state-map (kbd "C-c v n") 'diff-hl-next-hunk)
+    (define-key evil-normal-state-map (kbd "C-c v e") 'diff-hl-previous-hunk)))
 
 ;; ============================================================================
 ;; CENTAUR-TABS - Tab navigation alternatives
@@ -430,7 +433,8 @@
   (defun my/evil-collection-setup-hook (mode mode-keymaps &rest _rest)
     "Apply custom bindings after evil-collection sets up a mode."
     (dolist (keymap mode-keymaps)
-      (when (keymapp (symbol-value keymap))
+      (when (and (boundp keymap)
+                 (keymapp (symbol-value keymap)))
         (evil-define-key '(normal motion) (symbol-value keymap)
           "m" 'evil-backward-char
           "n" 'evil-next-line

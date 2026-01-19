@@ -308,18 +308,19 @@ Project tree explorer.
 Autocompletion framework with a nice UI.
 
 #+begin_src emacs-lisp
-(use-package company
-  :ensure t
-  :hook (after-init . global-company-mode)
-  :after eglot
-  :config
-  ;; Eglot integrates with company via completion-at-point
-  (setq company-backends
-        (cons 'company-capf
-              (remove 'company-capf company-backends))))
+  (use-package company
+    :ensure t
+    :init
+    (global-company-mode 1)
+    :hook (after-init . global-company-mode)
+    :config
+    (setq company-minimum-prefix-length 1
+          company-idle-delay 0.1
+          company-tooltip-align-annotations t
+          company-backends '(company-capf)))
 
-(use-package company-box
-  :hook (company-mode . company-box-mode))
+  ;(use-package company-box
+    ;:hook (company-mode . company-box-mode))
 #+end_src
 
 ** Drag Stuff
@@ -436,43 +437,46 @@ Highlight uncommitted changes in the fringe.
 Built-in Language Server Protocol client for IDE features.
 
 #+begin_src emacs-lisp
-(use-package eglot
-  :ensure t
-  :hook ((python-mode . eglot-ensure)
-         (haskell-mode . eglot-ensure)
-         (haskell-literate-mode . eglot-ensure)
-         (c-mode . eglot-ensure)
-         (c++-mode . eglot-ensure)
-         (rust-mode . eglot-ensure)
-         (racket-mode . eglot-ensure)
-         (zig-mode . eglot-ensure)
-         (nix-mode . eglot-ensure)
-         (go-mode . eglot-ensure)
-         (idris-mode . eglot-ensure)
-         (lua-mode . eglot-ensure)
-         (koka-mode . eglot-ensure))
-  :bind (:map eglot-mode-map
-              ("C-c l r" . eglot-rename)
-              ("C-c l a" . eglot-code-actions)
-              ("C-c l f" . eglot-format)
-              ("C-c l h" . eldoc-doc-buffer)
-              ("C-c l d" . xref-find-definitions)
-              ("C-c l R" . xref-find-references)
-              ("C-c l n" . flymake-goto-next-error)
-              ("C-c l e" . flymake-goto-prev-error))
-  :custom
-  ;; Performance optimizations
-  (eglot-events-buffer-size 0)
-  (eglot-sync-connect nil)
-  (eglot-autoshutdown t)
-  (eglot-send-changes-idle-time 0.5)
-  :config
-  ;; Enable which-key integration
-  (add-hook 'eglot-managed-mode-hook
-            (lambda ()
-              (when (fboundp 'which-key-mode)
-                (which-key-add-key-based-replacements
-                  "C-c l" "eglot")))))
+  (use-package eglot
+    :ensure t
+    :hook ((python-mode . eglot-ensure)
+           (haskell-mode . eglot-ensure)
+           (haskell-literate-mode . eglot-ensure)
+           (c-mode . eglot-ensure)
+           (c++-mode . eglot-ensure)
+           (rust-mode . eglot-ensure)
+           (racket-mode . eglot-ensure)
+           (zig-mode . eglot-ensure)
+           (nix-mode . eglot-ensure)
+           (go-mode . eglot-ensure)
+           (idris-mode . eglot-ensure)
+           (lua-mode . eglot-ensure)
+           (koka-mode . eglot-ensure))
+    :bind (:map eglot-mode-map
+                ("C-c l r" . eglot-rename)
+                ("C-c l a" . eglot-code-actions)
+                ("C-c l f" . eglot-format)
+                ("C-c l h" . eldoc-doc-buffer)
+                ("C-c l d" . xref-find-definitions)
+                ("C-c l R" . xref-find-references)
+                ("C-c l n" . flymake-goto-next-error)
+                ("C-c l e" . flymake-goto-prev-error))
+    :custom
+    ;; Performance optimizations
+    (eglot-events-buffer-size 0)
+    (eglot-sync-connect nil)
+    (eglot-autoshutdown t)
+    (eglot-send-changes-idle-time 0.5)
+    :config
+    ;; Enable which-key integration
+    (add-hook 'eglot-managed-mode-hook
+              (lambda ()
+                (when (bound-and-true-p company-mode)
+                  (company-mode -1)
+                  (company-mode 1))
+                (when (fboundp 'which-key-mode)
+                  (which-key-add-key-based-replacements
+                    "C-c l" "eglot")))))
 #+end_src
 
 ** DAP Mode (Debugger)

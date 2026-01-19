@@ -157,13 +157,12 @@ Custom window navigation bindings.
 #+begin_src emacs-lisp
 (use-package bind-key)
 
-(bind-keys :map evil-normal-state-map
-           :prefix "C-w"
-           :prefix-map my-prefix-map
-           ("m" . evil-window-left)
-           ("n" . evil-window-down)
-           ("e" . evil-window-up)
-           ("i" . evil-window-right))
+;; Define window navigation keybindings
+(with-eval-after-load 'evil
+  (define-key evil-normal-state-map (kbd "C-w m") 'evil-window-left)
+  (define-key evil-normal-state-map (kbd "C-w n") 'evil-window-down)
+  (define-key evil-normal-state-map (kbd "C-w e") 'evil-window-up)
+  (define-key evil-normal-state-map (kbd "C-w i") 'evil-window-right))
 #+end_src
 
 ** Mode Specific Bindings

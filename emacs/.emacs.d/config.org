@@ -348,10 +348,8 @@ Edit files with sudo privileges.
 #+begin_src emacs-lisp
 (use-package sudo-edit
   :config
-  (bind-keys :map evil-normal-state-map
-             :prefix "SPC"
-             :prefix-map sudo-edit-map
-             ("s e" . sudo-edit)))
+  (with-eval-after-load 'evil
+    (define-key evil-normal-state-map (kbd "SPC s e") 'sudo-edit)))
 #+end_src
 
 ** Delete Selection Mode
@@ -533,10 +531,8 @@ AUCTeX for LaTeX editing with preview support.
   (setq TeX-parse-self t)
   (setq-default TeX-master nil)
   (setq TeX-PDF-mode t)
-  (bind-keys :map evil-normal-state-map
-             :prefix "SPC"
-             :prefix-map preview-map
-             ("l p" . preview-buffer)))
+  (with-eval-after-load 'evil
+    (define-key evil-normal-state-map (kbd "SPC l p") 'preview-buffer)))
 
 (use-package company-auctex
   :ensure t

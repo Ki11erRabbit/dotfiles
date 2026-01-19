@@ -1,0 +1,4 @@
+config.el
+evil.el
+elpa
+*.elc

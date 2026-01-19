@@ -68,23 +68,23 @@
 ;; WINDOW MANAGEMENT - Extended C-w commands
 ;; ============================================================================
 
-(bind-keys :map evil-normal-state-map
-           :prefix "C-w"
-           ;; Navigation (you already have these, keeping for completeness)
-           ("m" . evil-window-left)
-           ("n" . evil-window-down)
-           ("e" . evil-window-up)
-           ("i" . evil-window-right)
-           ;; Movement - move windows to different positions
-           ("M" . evil-window-move-far-left)
-           ("N" . evil-window-move-very-bottom)
-           ("E" . evil-window-move-very-top)
-           ("I" . evil-window-move-far-right)
-           ;; Alternative C- prefixed navigation
-           ("C-m" . evil-window-left)
-           ("C-n" . evil-window-down)
-           ("C-e" . evil-window-up)
-           ("C-i" . evil-window-right))
+(with-eval-after-load 'evil
+  (define-key evil-normal-state-map (kbd "C-w m") 'evil-window-left)
+  (define-key evil-normal-state-map (kbd "C-w n") 'evil-window-down)
+  (define-key evil-normal-state-map (kbd "C-w e") 'evil-window-up)
+  (define-key evil-normal-state-map (kbd "C-w i") 'evil-window-right)
+  
+  ;; Movement - move windows to different positions
+  (define-key evil-normal-state-map (kbd "C-w M") 'evil-window-move-far-left)
+  (define-key evil-normal-state-map (kbd "C-w N") 'evil-window-move-very-bottom)
+  (define-key evil-normal-state-map (kbd "C-w E") 'evil-window-move-very-top)
+  (define-key evil-normal-state-map (kbd "C-w I") 'evil-window-move-far-right)
+  
+  ;; Alternative C- prefixed navigation
+  (define-key evil-normal-state-map (kbd "C-w C-m") 'evil-window-left)
+  (define-key evil-normal-state-map (kbd "C-w C-n") 'evil-window-down)
+  (define-key evil-normal-state-map (kbd "C-w C-e") 'evil-window-up)
+  (define-key evil-normal-state-map (kbd "C-w C-i") 'evil-window-right))
 
 ;; ============================================================================
 ;; TREEMACS - File tree navigation
@@ -139,22 +139,44 @@
     "gi" 'org-forward-heading-same-level))
 
 ;; ============================================================================
-;; LSP MODE - Language server navigation
+;; EGLOT - Language server navigation (replaces lsp-mode section)
 ;; ============================================================================
 
-(with-eval-after-load 'lsp-mode
-  (evil-define-key 'normal lsp-mode-map
-    ;; Keep standard go-to bindings but be aware of conflicts
-    "gd" 'lsp-find-definition
-    "gr" 'lsp-find-references
-    "gD" 'lsp-find-declaration
-    "gI" 'lsp-find-implementation  ;; Note: conflicts with I (bottom of window)
-    "gt" 'lsp-find-type-definition))
+(with-eval-after-load 'eglot
+  (evil-define-key 'normal eglot-mode-map
+    ;; Go-to commands
+    "gd" 'xref-find-definitions
+    "gr" 'xref-find-references
+    "gD" 'eglot-find-declaration
+    "gI" 'eglot-find-implementation
+    "gt" 'eglot-find-typeDefinition
+    ;; Navigation through diagnostics (using flymake)
+    "C-c n" 'flymake-goto-next-error
+    "C-c e" 'flymake-goto-prev-error
+    "]d" 'flymake-goto-next-error
+    "[d" 'flymake-goto-prev-error))
 
-(with-eval-after-load 'lsp-ui
-  (evil-define-key 'normal lsp-ui-mode-map
-    "C-c n" 'lsp-ui-find-next-reference
-    "C-c e" 'lsp-ui-find-prev-reference))
+;; ============================================================================
+;; FLYMAKE - Diagnostic navigation (replaces lsp-ui)
+;; ============================================================================
+
+(with-eval-after-load 'flymake
+  (evil-define-key 'normal flymake-mode-map
+    "C-c n" 'flymake-goto-next-error
+    "C-c e" 'flymake-goto-prev-error
+    "]d" 'flymake-goto-next-error
+    "[d" 'flymake-goto-prev-error))
+
+;; ============================================================================
+;; XREF - Cross-reference navigation (used by eglot)
+;; ============================================================================
+
+(with-eval-after-load 'xref
+  (evil-define-key 'normal xref--xref-buffer-mode-map
+    "n" 'xref-next-line
+    "e" 'xref-prev-line
+    "gn" 'xref-next-group
+    "ge" 'xref-prev-group))
 
 ;; ============================================================================
 ;; DAP MODE - Debugger navigation
@@ -404,14 +426,18 @@
 ;; ============================================================================
 
 (with-eval-after-load 'evil-collection
-  ;; This will attempt to apply your bindings across all modes managed by evil-collection
-  ;; Some may need manual overrides above if they have special behavior
-  (dolist (mode '(normal visual motion))
-    (evil-collection-define-key mode 'evil-collection-mode-list
-      "m" 'evil-backward-char
-      "n" 'evil-next-line
-      "e" 'evil-previous-line
-      "i" 'evil-forward-char)))
+  ;; Hook into evil-collection's setup to apply our custom bindings
+  (defun my/evil-collection-setup-hook (mode mode-keymaps &rest _rest)
+    "Apply custom bindings after evil-collection sets up a mode."
+    (dolist (keymap mode-keymaps)
+      (when (keymapp (symbol-value keymap))
+        (evil-define-key '(normal motion) (symbol-value keymap)
+          "m" 'evil-backward-char
+          "n" 'evil-next-line
+          "e" 'evil-previous-line
+          "i" 'evil-forward-char))))
+  
+  (add-hook 'evil-collection-setup-hook #'my/evil-collection-setup-hook))
 
 ;; ============================================================================
 ;; UTILITY FUNCTION - Apply to any new mode

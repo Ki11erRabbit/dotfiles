@@ -1,6 +1,6 @@
 #+TITLE: Emacs Configuration
 #+AUTHOR: ki11errabbit
-#+PROPERTY: header-args:emacs-lisp :tangle ~/.emacs.d/init.el
+#+PROPERTY: header-args:emacs-lisp :tangle ~/.emacs.d/config.el
 #+STARTUP: overview
 
 * Table of Contents :TOC:
@@ -92,21 +92,12 @@ First, we set up the PATH for macOS systems to ensure all binaries are accessibl
 
 * Package Management
 
-Set up package archives and use-package for declarative package management.
+Package management is handled by the bootstrap init.el file.
+We just need to require use-package here since it's already installed.
 
 #+begin_src emacs-lisp
-(eval-and-compile
-  (require 'package)
-  (setq package-archives '(("elpa" . "https://elpa.gnu.org/packages/")
-                           ("melpa" . "https://melpa.org/packages/")))
-  (package-initialize)
-  ;; Fetch the archive contents on startup and during compilation
-  (package-refresh-contents)
-  (unless (package-installed-p 'use-package)
-    (package-install 'use-package))
-  (require 'use-package)
-  ;; Always ensure packages are installed
-  (setf use-package-always-ensure t))
+;; use-package is already set up by init.el
+;; This section is kept for documentation purposes
 #+end_src
 
 * Basic Settings
